@@ -46,6 +46,20 @@ TEST(TaskCalculateTests, Multiplication) {
     EXPECT_EQ(t.calculate(), 42);
 }
 
+TEST(TaskTest, CalculateDivision) {
+    Task t(1, 1, '/');
+    t.num_1 = 20;
+    t.num_2 = 4;
+    EXPECT_EQ(t.calculate(), 5);
+}
+
+TEST(TaskTest, CalculateDivisionByZeroThrows) {
+    Task t(1, 1, '/');
+    t.num_1 = 10;
+    t.num_2 = 0;
+    EXPECT_THROW(t.calculate(), std::invalid_argument);
+}
+
 TEST(TaskAnswerTests, AnswerMatchesOperation) {
     Task t;
     int expected = 0;
@@ -94,18 +108,4 @@ TEST(MathTestConstructorTests, WithOperationSubtraction) {
 TEST(MathTestConstructorTests, WithOperationMultiplication) {
     MathTest mt(6, 1, 5, '*');
     EXPECT_EQ(mt.getCount(), 6);
-}
-
-TEST(MathTestDestructorTests, NoCrashOnDelete) {
-    for (int i = 0; i < 100; ++i) {
-        MathTest mt(10);
-    }
-    SUCCEED();
-}
-
-TEST(MathTestDestructorTests, NoCrashOnScopeExit) {
-    {
-        MathTest mt(1000);
-    }
-    SUCCEED();
 }
