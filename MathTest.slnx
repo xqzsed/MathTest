@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Gtest/Gtest.vcxproj" Id="af6821ea-251c-4ef8-b19f-b12a696fd249" />
+  <Project Path="Lib2/Lib2.vcxproj" Id="4476df62-f16d-4b80-b4dc-7b15bd408bf5" />
+  <Project Path="MathTest/MathTest.vcxproj" Id="a288c885-5df5-4cb7-83dc-2132a3a9784c" />
+</Solution>
