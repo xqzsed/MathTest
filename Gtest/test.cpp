@@ -56,3 +56,56 @@ TEST(TaskAnswerTests, AnswerMatchesOperation) {
     }
     EXPECT_EQ(t.answer, expected);
 }
+
+TEST(MathTestConstructorTests, SizeOnly) {
+    MathTest mt(5);
+    EXPECT_EQ(mt.getCount(), 5);
+    EXPECT_EQ(mt.getCorrectCount(), 0);
+}
+
+TEST(MathTestConstructorTests, SizeZero) {
+    MathTest mt(0);
+    EXPECT_EQ(mt.getCount(), 0);
+    EXPECT_EQ(mt.getCorrectCount(), 0);
+}
+
+TEST(MathTestConstructorTests, WithRange) {
+    MathTest mt(3, 1, 10);
+    EXPECT_EQ(mt.getCount(), 3);
+    EXPECT_EQ(mt.getCorrectCount(), 0);
+}
+
+TEST(MathTestConstructorTests, WithNegativeRange) {
+    MathTest mt(4, -20, -5);
+    EXPECT_EQ(mt.getCount(), 4);
+}
+
+TEST(MathTestConstructorTests, WithOperationAddition) {
+    MathTest mt(4, 1, 10, '+');
+    EXPECT_EQ(mt.getCount(), 4);
+    EXPECT_EQ(mt.getCorrectCount(), 0);
+}
+
+TEST(MathTestConstructorTests, WithOperationSubtraction) {
+    MathTest mt(2, 1, 10, '-');
+    EXPECT_EQ(mt.getCount(), 2);
+}
+
+TEST(MathTestConstructorTests, WithOperationMultiplication) {
+    MathTest mt(6, 1, 5, '*');
+    EXPECT_EQ(mt.getCount(), 6);
+}
+
+TEST(MathTestDestructorTests, NoCrashOnDelete) {
+    for (int i = 0; i < 100; ++i) {
+        MathTest mt(10);
+    }
+    SUCCEED();
+}
+
+TEST(MathTestDestructorTests, NoCrashOnScopeExit) {
+    {
+        MathTest mt(1000);
+    }
+    SUCCEED();
+}
