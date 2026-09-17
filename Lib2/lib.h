@@ -2,6 +2,7 @@
 #include "lib.h"
 #include <ctime>
 #include <cstdlib>
+#include <clocale>
 using namespace std;
 struct Task {
 	int num_1;
@@ -64,4 +65,45 @@ Task::Task(int minValue, int maxValue) {
 		break;
 	}
 	answer = calculate();
+}
+
+MathTest::MathTest(int count)
+	: MathTest(count, -100, 100, '\0') {
+}
+
+MathTest::MathTest(int count, int minValue, int maxValue)
+	: MathTest(count, minValue, maxValue, '\0') {
+}
+
+MathTest::MathTest(int count, int minValue, int maxValue, char operation)
+	: count(count), correctCount(0) {
+	tasks = new Task[count];
+	userAnswers = new int[count];
+
+	for (int i = 0; i < count; ++i) {
+		tasks[i] = Task(minValue, maxValue);
+		userAnswers[i] = 0;
+	}
+}
+
+MathTest::~MathTest() {
+	delete[] tasks;
+	delete[] userAnswers;
+}
+void MathTest::run() {
+	correctCount = 0;
+	for (int i = 0; i < count; ++i) {
+		cout << "Вопрос " << (i + 1) << count << ": ";
+		cout << tasks[i].num_1 << " " << tasks[i].operation << " " << tasks[i].num_2 << " = ";
+		cin >> userAnswers[i];
+
+		if (userAnswers[i] == tasks[i].answer) {
+			++correctCount;
+		}
+	}
+}
+void MathTest::showStatistics() const {
+	cout << "Правильных ответов: " << correctCount << " из " << count << endl;
+	double percent = (count > 0) ? (100.0 * correctCount / count) : 0.0;
+	cout << "Процент: " << percent << "%" << endl;
 }
