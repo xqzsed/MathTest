@@ -11,7 +11,24 @@ struct Task {
 	int calculate();
 	Task(int minValue = -100, int maxValue = 100);
 };
-class MathTest;
+class MathTest {
+	Task* tasks;
+	int count;
+	int* userAnswers;
+	int correctCount;
+public:
+	MathTest(int count);
+	MathTest(int count, int minValue, int maxValue);
+	MathTest(int count, int minValue, int maxValue, char operation);
+	~MathTest();
+
+	void run();
+
+	void showStatistics() const;
+
+	int getCount() const { return count; }
+	int getCorrectCount() const { return correctCount; }
+};
 
 int Task::calculate() {
 	int ans = 0;
